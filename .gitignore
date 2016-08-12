@@ -16,3 +16,6 @@ ui_*
 *.so
 *.order
 test2/test2
+Makefile
+.build
+.qmake.stash
