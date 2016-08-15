@@ -21,11 +21,11 @@
 #ifndef QGTK2DIALOGHELPERS_P_H
 #define QGTK2DIALOGHELPERS_P_H
 
-#include <QtCore/qhash.h>
-#include <QtCore/qlist.h>
-#include <QtCore/qurl.h>
-#include <QtCore/qscopedpointer.h>
-#include <QtCore/qstring.h>
+#include <QHash>
+#include <QList>
+#include <QUrl>
+#include <QScopedPointer>
+#include <QString>
 #include <qpa/qplatformdialoghelper.h>
 
 typedef struct _GtkDialog GtkDialog;

@@ -32,17 +32,17 @@
 // We mean it.
 //
 
-#include <QtCore/qglobal.h>
+#include <QtGlobal>
 #if !defined(QT_NO_STYLE_GTK)
 
-#include <QtCore/qstring.h>
-#include <QtCore/qstringbuilder.h>
-#include <QtCore/qcoreapplication.h>
+#include <QString>
+#include <QStringBuilder>
+#include <QCoreApplication>
+#include <QFileDialog>
+#include <QCommonStyle>
 
-#include <QtWidgets/QFileDialog>
-
-#include "qgtkstyle_p.h"
 #include <private/qcommonstyle_p.h>
+#include "qgtkstyle_p.h"
 #include "qgtkglobal_p.h"
 
 #define Q_GTK_IS_WIDGET(widget) widget && G_TYPE_CHECK_INSTANCE_TYPE ((widget), QGtkStylePrivate::gtk_widget_get_type())

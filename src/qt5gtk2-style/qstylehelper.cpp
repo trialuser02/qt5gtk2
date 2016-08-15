@@ -18,18 +18,18 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 
-#include <qstyleoption.h>
-#include <qpainter.h>
-#include <qpixmapcache.h>
+#include <QStyleOption>
+#include <QPainter>
+#include <QPixmapCache>
 #include <private/qmath_p.h>
 #include <private/qstyle_p.h>
-#include <qmath.h>
-#include <qscrollbar.h>
-#include <qabstractscrollarea.h>
-#include <qwindow.h>
+#include <QtMath>
+#include <QScrollBar>
+#include <QAbstractScrollArea>
+#include <QWindow>
 
 #include "qstylehelper_p.h"
-#include <qstringbuilder.h>
+#include <QStringBuilder>
 
 QT_BEGIN_NAMESPACE
 

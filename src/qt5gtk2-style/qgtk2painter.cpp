@@ -20,7 +20,7 @@
 
 #include "qgtk2painter_p.h"
 
-#include <QtCore/qglobal.h>
+#include <QtGlobal>
 #if !defined(QT_NO_STYLE_GTK)
 
 // This class is primarily a wrapper around the gtk painter functions
@@ -28,9 +28,9 @@
 
 #include "qgtkstyle_p_p.h"
 #include <private/qhexstring_p.h>
-#include <QtWidgets/QWidget>
-#include <QtGui/QPixmapCache>
-#include <QtCore/QLibrary>
+#include <QWidget>
+#include <QPixmapCache>
+#include <QLibrary>
 
 QT_BEGIN_NAMESPACE
 

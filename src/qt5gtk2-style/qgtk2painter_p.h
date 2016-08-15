@@ -32,7 +32,7 @@
 // We mean it.
 //
 
-#include <QtCore/qglobal.h>
+#include <QtGlobal>
 #if !defined(QT_NO_STYLE_GTK)
 
 #include "qgtkpainter_p.h"

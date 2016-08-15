@@ -29,31 +29,31 @@
 // actual widget pointers for details that are not covered by the
 // state flags
 
-#include <QtCore/qglobal.h>
+#include <qglobal.h>
 #if !defined(QT_NO_STYLE_GTK)
 
-#include <QtCore/QEvent>
-#include <QtCore/QFile>
-#include <QtCore/QStringList>
-#include <QtCore/QTextStream>
-#include <QtCore/QHash>
-#include <QtCore/QUrl>
-#include <QtCore/QLibrary>
-#include <QtCore/QDebug>
+#include <QEvent>
+#include <QFile>
+#include <QStringList>
+#include <QTextStream>
+#include <QHash>
+#include <QUrl>
+#include <QLibrary>
+#include <QDebug>
 
 #include "qgtk2painter_p.h"
 #include <private/qapplication_p.h>
 #include <private/qiconloader_p.h>
 #include <qpa/qplatformfontdatabase.h>
 
-#include <QtWidgets/QMenu>
-#include <QtWidgets/QStyle>
-#include <QtWidgets/QApplication>
-#include <QtGui/QPixmapCache>
-#include <QtWidgets/QStatusBar>
-#include <QtWidgets/QMenuBar>
-#include <QtWidgets/QToolBar>
-#include <QtWidgets/QToolButton>
+#include <QMenu>
+#include <QStyle>
+#include <QApplication>
+#include <QPixmapCache>
+#include <QStatusBar>
+#include <QMenuBar>
+#include <QToolBar>
+#include <QToolButton>
 
 #ifndef Q_OS_MAC
 // X11 Includes:

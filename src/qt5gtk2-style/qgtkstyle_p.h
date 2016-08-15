@@ -33,10 +33,10 @@
 //
 
 //#include <private/qwindowsstyle_p.h>
-#include <QtGui/QPalette>
-#include <QtGui/QFont>
-#include <QtWidgets/QFileDialog>
-#include <QtWidgets/QCommonStyle>
+#include <QPalette>
+#include <QFont>
+#include <QFileDialog>
+#include <QCommonStyle>
 
 QT_BEGIN_NAMESPACE
 

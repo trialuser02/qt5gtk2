@@ -32,15 +32,15 @@
 // We mean it.
 //
 
-#include <QtCore/qglobal.h>
+#include <QtGlobal>
 #if !defined(QT_NO_STYLE_GTK)
 
 #include "qgtkglobal_p.h"
-#include <QtCore/qsize.h>
-#include <QtCore/qrect.h>
-#include <QtCore/qpoint.h>
-#include <QtGui/qpixmap.h>
-#include <QtGui/qpainter.h>
+#include <QSize>
+#include <QRect>
+#include <QPoint>
+#include <QPixmap>
+#include <QPainter>
 
 QT_BEGIN_NAMESPACE
 

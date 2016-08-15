@@ -18,12 +18,12 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 
-#include <QtCore/qglobal.h>
-#include <QtCore/qpoint.h>
-#include <QtCore/qstring.h>
-#include <QtGui/qpolygon.h>
-#include <QtCore/qstringbuilder.h>
-#include <QtGui/qaccessible.h>
+#include <QtGlobal>
+#include <QPoint>
+#include <QString>
+#include <QPolygon>
+#include <QStringBuilder>
+#include <QAccessible>
 
 #ifndef QSTYLEHELPER_P_H
 #define QSTYLEHELPER_P_H
