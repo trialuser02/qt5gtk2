@@ -18,7 +18,7 @@ git checkout master
 echo "Creating changelog.."
 git log > ChangeLog.git
 
-TARBALL=qt5gtk2-0.1
+TARBALL=qt5gtk2-0.2
 
 
 echo Sources name: $TARBALL
