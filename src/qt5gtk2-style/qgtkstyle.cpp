@@ -2133,7 +2133,7 @@ void QGtkStyle::drawComplexControl(ComplexControl control, const QStyleOptionCom
             style = d->gtk_widget_get_style(scrollbarWidget);
             gboolean trough_under_steppers = true;
             gboolean trough_side_details = false;
-            gboolean activate_slider = false;
+            gboolean activate_slider = true;
             gboolean stepper_size = 14;
             gint trough_border = 1;
             if (!d->gtk_check_version(2, 10, 0)) {
@@ -2141,7 +2141,7 @@ void QGtkStyle::drawComplexControl(ComplexControl control, const QStyleOptionCom
                                            "trough-border",         &trough_border,
                                            "trough-side-details",   &trough_side_details,
                                            "trough-under-steppers", &trough_under_steppers,
-                                           "activate-slider",       &activate_slider,
+                                           /*"activate-slider",       &activate_slider,*/ //deprecated
                                            "stepper-size",          &stepper_size, NULL);
             }
             if (trough_under_steppers) {
