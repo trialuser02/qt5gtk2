@@ -6,6 +6,9 @@ Requirements:
 
 - GNU Linux or FreeBSD
 - qtbase >= 5.7.0 (with private headers)
+- GConf
+- GKT+ 2.0
+- libX11
 
 Installation:
 
