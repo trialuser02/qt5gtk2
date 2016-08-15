@@ -266,9 +266,6 @@ public:
     static QFont getThemeFont();
     static bool isThemeAvailable() { return gtkStyle() != 0; }
 
-    static bool getGConfBool(const QString &key, bool fallback = 0);
-    static QString getGConfString(const QString &key, const QString &fallback = QString());
-
     static QString getThemeName();
     virtual int getSpinboxArrowSize() const;
 
@@ -366,10 +363,6 @@ public:
     static Ptr_gdk_x11_window_set_user_time gdk_x11_window_set_user_time;
     static Ptr_gdk_x11_drawable_get_xid gdk_x11_drawable_get_xid;
     static Ptr_gdk_x11_drawable_get_xdisplay gdk_x11_drawable_get_xdisplay;
-
-    static Ptr_gconf_client_get_default gconf_client_get_default;
-    static Ptr_gconf_client_get_string gconf_client_get_string;
-    static Ptr_gconf_client_get_bool gconf_client_get_bool;
 
     static Ptr_gnome_icon_lookup_sync gnome_icon_lookup_sync;
     static Ptr_gnome_vfs_init gnome_vfs_init;

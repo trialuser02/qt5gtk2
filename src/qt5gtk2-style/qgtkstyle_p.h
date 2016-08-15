@@ -99,9 +99,6 @@ public:
 
     void unpolish(QWidget *widget) Q_DECL_OVERRIDE;
     void unpolish(QApplication *app) Q_DECL_OVERRIDE;
-
-    static bool getGConfBool(const QString &key, bool fallback = 0);
-    static QString getGConfString(const QString &key, const QString &fallback = QString());
 };
 
 #endif //!defined(QT_NO_STYLE_QGTK)

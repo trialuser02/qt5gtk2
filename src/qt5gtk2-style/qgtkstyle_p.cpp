@@ -170,10 +170,6 @@ Ptr_gdk_x11_window_set_user_time QGtkStylePrivate::gdk_x11_window_set_user_time 
 Ptr_gdk_x11_drawable_get_xid QGtkStylePrivate::gdk_x11_drawable_get_xid = 0;
 Ptr_gdk_x11_drawable_get_xdisplay QGtkStylePrivate::gdk_x11_drawable_get_xdisplay = 0;
 
-Ptr_gconf_client_get_default QGtkStylePrivate::gconf_client_get_default = 0;
-Ptr_gconf_client_get_string QGtkStylePrivate::gconf_client_get_string = 0;
-Ptr_gconf_client_get_bool QGtkStylePrivate::gconf_client_get_bool = 0;
-
 Ptr_gnome_icon_lookup_sync QGtkStylePrivate::gnome_icon_lookup_sync = 0;
 Ptr_gnome_vfs_init QGtkStylePrivate::gnome_vfs_init = 0;
 
@@ -183,7 +179,7 @@ typedef int (*x11ErrorHandler)(Display*, XErrorEvent*);
 
 QT_END_NAMESPACE
 
-Q_DECLARE_METATYPE(QGtkStylePrivate*);
+Q_DECLARE_METATYPE(QGtkStylePrivate*)
 
 QT_BEGIN_NAMESPACE
 
@@ -578,58 +574,6 @@ void QGtkStylePrivate::cleanupGtkWidgets()
     for (QHash<QHashableLatin1Literal, GtkWidget *>::const_iterator it = widgetMap->constBegin();
          it != widgetMap->constEnd(); ++it)
         free(const_cast<char *>(it.key().data()));
-}
-
-static bool resolveGConf()
-{
-#ifndef QT_NO_LIBRARY
-    if (!QGtkStylePrivate::gconf_client_get_default) {
-        QGtkStylePrivate::gconf_client_get_default = (Ptr_gconf_client_get_default)QLibrary::resolve(QLS("gconf-2"), 4, "gconf_client_get_default");
-        QGtkStylePrivate::gconf_client_get_string =  (Ptr_gconf_client_get_string)QLibrary::resolve(QLS("gconf-2"), 4, "gconf_client_get_string");
-        QGtkStylePrivate::gconf_client_get_bool =  (Ptr_gconf_client_get_bool)QLibrary::resolve(QLS("gconf-2"), 4, "gconf_client_get_bool");
-    }
-#endif // !QT_NO_LIBRARY
-    return (QGtkStylePrivate::gconf_client_get_default !=0);
-}
-
-QString QGtkStylePrivate::getGConfString(const QString &value, const QString &fallback)
-{
-    QString retVal = fallback;
-    if (resolveGConf()) {
-#if !defined(GLIB_VERSION_2_36)
-        g_type_init();
-#endif
-        GConfClient* client = gconf_client_get_default();
-        GError *err = 0;
-        char *str = gconf_client_get_string(client, qPrintable(value), &err);
-        if (!err) {
-            retVal = QString::fromUtf8(str);
-            g_free(str);
-        }
-        g_object_unref(client);
-        if (err)
-            g_error_free (err);
-    }
-    return retVal;
-}
-
-bool QGtkStylePrivate::getGConfBool(const QString &key, bool fallback)
-{
-    bool retVal = fallback;
-    if (resolveGConf()) {
-#if !defined(GLIB_VERSION_2_36)
-        g_type_init();
-#endif
-        GConfClient* client = gconf_client_get_default();
-        GError *err = 0;
-        bool result = gconf_client_get_bool(client, qPrintable(key), &err);
-        g_object_unref(client);
-        if (!err)
-            retVal = result;
-        else
-            g_error_free (err);
-    }
-    return retVal;
 }
 
 QString QGtkStylePrivate::getThemeName()
