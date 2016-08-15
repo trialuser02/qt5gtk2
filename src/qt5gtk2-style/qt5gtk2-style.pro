@@ -20,7 +20,7 @@ SOURCES += qgtk2painter.cpp qgtkpainter.cpp qgtkstyle.cpp qgtkstyle_p.cpp \
 CONFIG += plugin \
           link_pkgconfig \
 
-PKGCONFIG += gconf-2.0 gtk+-2.0 x11
+PKGCONFIG += gtk+-2.0 x11
 
 target.path = $$PLUGINDIR/styles
 INSTALLS += target
