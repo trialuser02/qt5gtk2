@@ -99,13 +99,7 @@ uint qHash(const QHashableLatin1Literal &key);
 
 QT_END_NAMESPACE
 
-class GConf;
-class GConfClient;
 typedef struct _XDisplay Display;
-
-typedef GConfClient* (*Ptr_gconf_client_get_default)();
-typedef char* (*Ptr_gconf_client_get_string)(GConfClient*, const char*, GError **);
-typedef bool (*Ptr_gconf_client_get_bool)(GConfClient*, const char*, GError **);
 
 typedef void (*Ptr_gtk_init)(int *, char ***);
 typedef GtkWidget* (*Ptr_gtk_window_new) (GtkWindowType);
