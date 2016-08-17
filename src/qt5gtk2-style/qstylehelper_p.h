@@ -52,7 +52,6 @@ class QWindow;
 namespace QStyleHelper
 {
     QString uniqueName(const QString &key, const QStyleOption *option, const QSize &size);
-    qreal dpiScaled(qreal value);
 #ifndef QT_NO_DIAL
     qreal angle(const QPointF &p1, const QPointF &p2);
     QPolygonF calcLines(const QStyleOptionSlider *dial);
@@ -66,8 +65,6 @@ namespace QStyleHelper
     bool isInstanceOf(QObject *obj, QAccessible::Role role);
     bool hasAncestor(QObject *obj, QAccessible::Role role);
 #endif
-    QColor backgroundColor(const QPalette &pal, const QWidget* widget = 0);
-    QWindow *styleObjectWindow(QObject *so);
 }
 
 

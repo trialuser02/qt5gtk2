@@ -33,8 +33,6 @@
 
 QT_BEGIN_NAMESPACE
 
-Q_GUI_EXPORT int qt_defaultDpiX();
-
 namespace QStyleHelper {
 
 QString uniqueName(const QString &key, const QStyleOption *option, const QSize &size)
@@ -55,17 +53,6 @@ QString uniqueName(const QString &key, const QStyleOption *option, const QSize &
     }
 #endif // QT_NO_SPINBOX
     return tmp;
-}
-
-qreal dpiScaled(qreal value)
-{
-#ifdef Q_OS_MAC
-    // On mac the DPI is always 72 so we should not scale it
-    return value;
-#else
-    static const qreal scale = qreal(qt_defaultDpiX()) / 96.0;
-    return value * scale;
-#endif
 }
 
 #ifndef QT_NO_ACCESSIBILITY
