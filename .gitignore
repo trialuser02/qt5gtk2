@@ -20,3 +20,4 @@ Makefile
 .build
 .qmake.stash
 extras/
+tests/standarddialogs/standarddialogs
