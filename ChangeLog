@@ -8,3 +8,6 @@ Version 0.2
 * removed gconf dependency
 * removed warning about missing GtkRange::activate-slider property
 * updated copyright and documentation
+
+Version 0.3
+* using gtk2 library directly
