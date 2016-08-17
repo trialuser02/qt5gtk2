@@ -30,7 +30,6 @@
 #include <private/qhexstring_p.h>
 #include <QWidget>
 #include <QPixmapCache>
-#include <QLibrary>
 
 QT_BEGIN_NAMESPACE
 

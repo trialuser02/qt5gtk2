@@ -117,28 +117,6 @@ private:
     bool eventFilter(QObject *obj, QEvent *e) Q_DECL_OVERRIDE;
 };
 
-typedef enum {
-  GNOME_ICON_LOOKUP_FLAGS_NONE = 0,
-  GNOME_ICON_LOOKUP_FLAGS_EMBEDDING_TEXT = 1<<0,
-  GNOME_ICON_LOOKUP_FLAGS_SHOW_SMALL_IMAGES_AS_THEMSELVES = 1<<1,
-  GNOME_ICON_LOOKUP_FLAGS_ALLOW_SVG_AS_THEMSELVES = 1<<2
-} GnomeIconLookupFlags;
-
-typedef enum {
-  GNOME_ICON_LOOKUP_RESULT_FLAGS_NONE = 0,
-  GNOME_ICON_LOOKUP_RESULT_FLAGS_THUMBNAIL = 1<<0
-} GnomeIconLookupResultFlags;
-
-struct GnomeThumbnailFactory;
-typedef gboolean (*Ptr_gnome_vfs_init) (void);
-typedef char* (*Ptr_gnome_icon_lookup_sync)  (
-        GtkIconTheme *icon_theme,
-        GnomeThumbnailFactory *,
-        const char *file_uri,
-        const char *custom_icon,
-        GnomeIconLookupFlags flags,
-        GnomeIconLookupResultFlags *result);
-
 class QGtkStylePrivate : public QCommonStylePrivate
 {
     Q_DECLARE_PUBLIC(QGtkStyle)
@@ -153,7 +131,6 @@ public:
     static GtkStyle* gtkStyle(const QHashableLatin1Literal &path = QHashableLatin1Literal("GtkWindow"));
     static void gtkWidgetSetFocus(GtkWidget *widget, bool focus);
 
-    virtual void resolveGtk() const;
     virtual void initGtkMenu() const;
     virtual void initGtkTreeview() const;
     virtual void initGtkWidgets() const;
@@ -167,11 +144,6 @@ public:
 
     static QString getThemeName();
     virtual int getSpinboxArrowSize() const;
-
-    static QIcon getFilesystemIcon(const QFileInfo &);
-
-    static Ptr_gnome_icon_lookup_sync gnome_icon_lookup_sync;
-    static Ptr_gnome_vfs_init gnome_vfs_init;
 
     virtual QPalette gtkWidgetPalette(const QHashableLatin1Literal &gtkWidgetName) const;
 

@@ -38,7 +38,6 @@
 #include <QTextStream>
 #include <QHash>
 #include <QUrl>
-#include <QLibrary>
 #include <QDebug>
 
 #include "qgtk2painter_p.h"
@@ -76,9 +75,6 @@
 QT_BEGIN_NAMESPACE
 
 Q_GLOBAL_STATIC(QGtkStyleUpdateScheduler, styleScheduler)
-
-Ptr_gnome_icon_lookup_sync QGtkStylePrivate::gnome_icon_lookup_sync = 0;
-Ptr_gnome_vfs_init QGtkStylePrivate::gnome_vfs_init = 0;
 
 #ifndef Q_OS_MAC
 typedef int (*x11ErrorHandler)(Display*, XErrorEvent*);
@@ -164,7 +160,6 @@ QGtkStylePrivate::~QGtkStylePrivate()
 
 void QGtkStylePrivate::init()
 {
-    resolveGtk();
     initGtkWidgets();
 }
 
@@ -200,17 +195,6 @@ void QGtkStylePrivate::gtkWidgetSetFocus(GtkWidget *widget, bool focus)
     event->focus_change.in = focus;
     gtk_widget_send_focus_change(widget, event);
     gdk_event_free(event);
-}
-
-/*! \internal
- *  Get references to gtk functions after we dynamically load the library.
- */
-void QGtkStylePrivate::resolveGtk() const
-{
-#ifndef QT_NO_LIBRARY
-    gnome_icon_lookup_sync = (Ptr_gnome_icon_lookup_sync)QLibrary::resolve(QLS("gnomeui-2"), 0, "gnome_icon_lookup_sync");
-    gnome_vfs_init= (Ptr_gnome_vfs_init)QLibrary::resolve(QLS("gnomevfs-2"), 0, "gnome_vfs_init");
-#endif // !QT_NO_LIBRARY
 }
 
 /* \internal
@@ -567,28 +551,6 @@ QFont QGtkStylePrivate::getThemeFont()
             font.setStyle(QFont::StyleNormal);
     }
     return font;
-}
-
-QIcon QGtkStylePrivate::getFilesystemIcon(const QFileInfo &info)
-{
-    QIcon icon;
-    if (isThemeAvailable() && gnome_vfs_init && gnome_icon_lookup_sync) {
-        gnome_vfs_init();
-        GtkIconTheme *theme = gtk_icon_theme_get_default();
-        QByteArray fileurl = QUrl::fromLocalFile(info.absoluteFilePath()).toEncoded();
-        char * icon_name = gnome_icon_lookup_sync(theme,
-                                                  NULL,
-                                                  fileurl.data(),
-                                                  NULL,
-                                                  GNOME_ICON_LOOKUP_FLAGS_NONE,
-                                                  NULL);
-        QString iconName = QString::fromUtf8(icon_name);
-        g_free(icon_name);
-        if (iconName.startsWith(QLatin1Char('/')))
-            return QIcon(iconName);
-        return QIcon::fromTheme(iconName);
-    }
-    return icon;
 }
 
 bool operator==(const QHashableLatin1Literal &l1, const QHashableLatin1Literal &l2)

@@ -23,7 +23,6 @@
 #if !defined(QT_NO_STYLE_GTK)
 
 #include <private/qapplication_p.h>
-#include <QLibrary>
 #include <QSettings>
 #include <QDialogButtonBox>
 #include <QStatusBar>
