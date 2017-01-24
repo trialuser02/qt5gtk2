@@ -12,3 +12,6 @@ Version 0.2
 Version 0.3
 * using gtk2 library directly
 * removed unused code
+
+Version 0.4
+* added Qt 5.8 support
