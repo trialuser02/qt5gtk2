@@ -6,7 +6,7 @@ Requirements:
 
 - GNU Linux or FreeBSD
 - qtbase >= 5.7.0 (with private headers)
-- GKT+ 2.0
+- GTK+ 2.0
 - libX11
 
 Installation:
@@ -35,4 +35,3 @@ libqt5gtk2-style.so - GTK+2.0 style plugin
 
 Attention!
 Environment variable QT_STYLE_OVERRIDE should be removed before usage.
-
