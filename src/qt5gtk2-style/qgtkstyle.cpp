@@ -56,6 +56,11 @@
 #include "qstylehelper_p.h"
 #include "qgtkstyle_p_p.h"
 
+#ifndef Q_FALLTHROUGH
+#define Q_FALLTHROUGH() (void)0
+#endif
+
+
 QT_BEGIN_NAMESPACE
 
 static GtkStateType qt_gtk_state(const QStyleOption *option)
@@ -3721,11 +3726,13 @@ QRect QGtkStyle::subControlRect(ComplexControl control, const QStyleOptionComple
         case SC_TitleBarContextHelpButton:
             if (tb->titleBarFlags & Qt::WindowContextHelpButtonHint)
                 offset += delta;
+            Q_FALLTHROUGH();
         case SC_TitleBarMinButton:
             if (!isMinimized && (tb->titleBarFlags & Qt::WindowMinimizeButtonHint))
                 offset += delta;
             else if (sc == SC_TitleBarMinButton)
                 break;
+            Q_FALLTHROUGH();
         case SC_TitleBarNormalButton:
             if (isMinimized && (tb->titleBarFlags & Qt::WindowMinimizeButtonHint))
                 offset += delta;
@@ -3733,21 +3740,25 @@ QRect QGtkStyle::subControlRect(ComplexControl control, const QStyleOptionComple
                 offset += delta;
             else if (sc == SC_TitleBarNormalButton)
                 break;
+            Q_FALLTHROUGH();
         case SC_TitleBarMaxButton:
             if (!isMaximized && (tb->titleBarFlags & Qt::WindowMaximizeButtonHint))
                 offset += delta;
             else if (sc == SC_TitleBarMaxButton)
                 break;
+            Q_FALLTHROUGH();
         case SC_TitleBarShadeButton:
             if (!isMinimized && (tb->titleBarFlags & Qt::WindowShadeButtonHint))
                 offset += delta;
             else if (sc == SC_TitleBarShadeButton)
                 break;
+            Q_FALLTHROUGH();
         case SC_TitleBarUnshadeButton:
             if (isMinimized && (tb->titleBarFlags & Qt::WindowShadeButtonHint))
                 offset += delta;
             else if (sc == SC_TitleBarUnshadeButton)
                 break;
+            Q_FALLTHROUGH();
         case SC_TitleBarCloseButton:
             if (tb->titleBarFlags & Qt::WindowSystemMenuHint)
                 offset += delta;
