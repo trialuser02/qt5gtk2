@@ -4102,6 +4102,12 @@ QIcon QGtkStyle::standardIcon(StandardPixmap standardIcon,
     if (!d->isThemeAvailable())
         return QCommonStyle::standardIcon(standardIcon, option, widget);
     switch (standardIcon) {
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
+    case SP_TitleBarNormalButton:
+    case SP_TitleBarCloseButton:
+    case SP_DockWidgetCloseButton:
+        return QIcon(QGtkStyle::standardPixmap(standardIcon, option, widget));
+#endif
     case SP_DialogDiscardButton:
         return qt_gtk_get_icon(GTK_STOCK_DELETE);
     case SP_DialogOkButton:
