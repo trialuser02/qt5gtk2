@@ -15,3 +15,9 @@ Version 0.3
 
 Version 0.4
 * added Qt 5.8 support
+
+Version 0.5
+* fixed documentation
+* fixed 'distclean' target
+* fixed gcc warnings
+* fixed QDockWidget icons (Qt 5.10+)
