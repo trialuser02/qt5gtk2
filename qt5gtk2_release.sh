@@ -1,6 +1,6 @@
 #!/bin/sh
 
-VERSION=0.4
+VERSION=0.5
 
 NAME=qt5gtk2
 
