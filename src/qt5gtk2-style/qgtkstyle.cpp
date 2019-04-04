@@ -724,7 +724,7 @@ int QGtkStyle::styleHint(StyleHint hint, const QStyleOption *option, const QWidg
         return true;
     case SH_Table_GridLineColor:
         if (option)
-            return option->palette.background().color().darker(120).rgb();
+            return option->palette.window().color().darker(120).rgb();
         break;
     case SH_WindowFrame_Mask:
         if (QStyleHintReturnMask *mask = qstyleoption_cast<QStyleHintReturnMask *>(returnData)) {
@@ -881,7 +881,7 @@ void QGtkStyle::drawPrimitive(PrimitiveElement element,
         QRect pmRect(QPoint(0,0), QSize(pmSize, pmSize));
 
         // Only draw through style once
-        if (!QPixmapCache::find(pmKey, pixmap)) {
+        if (!QPixmapCache::find(pmKey, &pixmap)) {
             pixmap = QPixmap(pmSize, pmSize);
             pixmap.fill(Qt::transparent);
             QPainter pmPainter(&pixmap);
@@ -932,7 +932,7 @@ void QGtkStyle::drawPrimitive(PrimitiveElement element,
             painter->setPen(QPen(option->palette.light(), 0));
             painter->drawLine(QPoint(rect.left() + 1, rect.top() + 1),
                               QPoint(rect.left() + 1, rect.bottom() - 1));
-            painter->setPen(QPen(option->palette.background().color().darker(120), 0));
+            painter->setPen(QPen(option->palette.window().color().darker(120), 0));
             painter->drawLine(QPoint(rect.left() + 1, rect.bottom() - 1),
                               QPoint(rect.right() - 2, rect.bottom() - 1));
             painter->drawLine(QPoint(rect.right() - 1, rect.top() + 1),
@@ -1075,14 +1075,14 @@ void QGtkStyle::drawPrimitive(PrimitiveElement element,
             if (option->state & State_Horizontal) {
                 const int offset = option->rect.width()/2;
                 QRect rect = option->rect.adjusted(offset, margin, 0, -margin);
-                painter->setPen(QPen(option->palette.background().color().darker(110)));
+                painter->setPen(QPen(option->palette.window().color().darker(110)));
                 gtkPainter->paintVline(gtkSeparator, "vseparator",
                                        rect, GTK_STATE_NORMAL, gtk_widget_get_style(gtkSeparator),
                                        0, rect.height(), 0);
             } else { //Draw vertical separator
                 const int offset = option->rect.height()/2;
                 QRect rect = option->rect.adjusted(margin, offset, -margin, 0);
-                painter->setPen(QPen(option->palette.background().color().darker(110)));
+                painter->setPen(QPen(option->palette.window().color().darker(110)));
                 gtkPainter->paintHline(gtkSeparator, "hseparator",
                                        rect, GTK_STATE_NORMAL, gtk_widget_get_style(gtkSeparator),
                                        0, rect.width(), 0);
@@ -1398,7 +1398,7 @@ void QGtkStyle::drawPrimitive(PrimitiveElement element,
                 = qstyleoption_cast<const QStyleOptionTabBarBase *>(option)) {
             QRect tabRect = tbb->rect;
             painter->save();
-            painter->setPen(QPen(option->palette.dark().color().dark(110), 0));
+            painter->setPen(QPen(option->palette.dark().color().darker(110), 0));
             switch (tbb->shape) {
 
             case QTabBar::RoundedNorth:
@@ -1476,7 +1476,7 @@ void QGtkStyle::drawComplexControl(ComplexControl control, const QStyleOptionCom
     if (widget)
         alphaCornerColor = mergedColors(option->palette.color(widget->backgroundRole()), darkOutline);
     else
-        alphaCornerColor = mergedColors(option->palette.background().color(), darkOutline);
+        alphaCornerColor = mergedColors(option->palette.window().color(), darkOutline);
 
     switch (control) {
 
@@ -1496,13 +1496,13 @@ void QGtkStyle::drawComplexControl(ComplexControl control, const QStyleOptionCom
             QColor highlight = bgColor;
 
             QColor titleBarFrameBorder(active ? highlight.darker(180): dark.darker(110));
-            QColor titleBarHighlight(active ? highlight.lighter(120): palette.background().color().lighter(120));
+            QColor titleBarHighlight(active ? highlight.lighter(120): palette.window().color().lighter(120));
             QColor textColor(active ? 0xffffff : 0xff000000);
             QColor textAlphaColor(active ? 0xffffff : 0xff000000 );
 
             {
                 // Fill title bar gradient
-                QColor titlebarColor = QColor(active ? highlight: palette.background().color());
+                QColor titlebarColor = QColor(active ? highlight: palette.window().color());
                 QLinearGradient gradient(option->rect.center().x(), option->rect.top(),
                                          option->rect.center().x(), option->rect.bottom());
 
@@ -2109,7 +2109,7 @@ void QGtkStyle::drawComplexControl(ComplexControl control, const QStyleOptionCom
             GtkWidget *gtkVScrollBar = d->gtkWidget("GtkVScrollbar");
 
             // Fill background in case the scrollbar is partially transparent
-            painter->fillRect(option->rect, option->palette.background());
+            painter->fillRect(option->rect, option->palette.window());
 
             QRect rect = scrollBar->rect;
             QRect scrollBarSubLine = proxy()->subControlRect(control, scrollBar, SC_ScrollBarSubLine, widget);
@@ -3214,7 +3214,7 @@ void QGtkStyle::drawControl(ControlElement element,
                     QStyleOption opt = *option;
 
                     if (act) {
-                        QColor activeColor = mergedColors(option->palette.background().color(),
+                        QColor activeColor = mergedColors(option->palette.window().color(),
                                                           option->palette.highlight().color());
                         opt.palette.setBrush(QPalette::Button, activeColor);
                     }
@@ -3858,7 +3858,11 @@ QSize QGtkStyle::sizeFromContents(ContentsType type, const QStyleOption *option,
             QFont font = gb->font();
             font.setBold(true);
             QFontMetrics metrics(font);
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 11, 0))
+            int baseWidth = metrics.horizontalAdvance(gb->title()) + metrics.horizontalAdvance(QLatin1Char(' '));
+#else
             int baseWidth = metrics.width(gb->title()) + metrics.width(QLatin1Char(' '));
+#endif
             if (gb->isCheckable()) {
                 baseWidth += proxy()->pixelMetric(QStyle::PM_IndicatorWidth, option, widget);
                 baseWidth += proxy()->pixelMetric(QStyle::PM_CheckBoxLabelSpacing, option, widget);
@@ -3982,7 +3986,11 @@ QSize QGtkStyle::sizeFromContents(ContentsType type, const QStyleOption *option,
                 QFont fontBold = menuItem->font;
                 fontBold.setBold(true);
                 QFontMetrics fmBold(fontBold);
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 11, 0))
+                w += fmBold.horizontalAdvance(menuItem->text) - fm.horizontalAdvance(menuItem->text);
+#else
                 w += fmBold.width(menuItem->text) - fm.width(menuItem->text);
+#endif
             }
 
             int checkcol = qMax<int>(maxpmw, QGtkStylePrivate::menuCheckMarkWidth); // Windows always shows a check column
