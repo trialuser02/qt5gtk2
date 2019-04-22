@@ -66,6 +66,10 @@ QVariant Qt5Gtk2Theme::themeHint(QPlatformTheme::ThemeHint hint) const
         //styleNames << QGnomeTheme::themeHint(hint).toStringList();
         return styleNames;
     }
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
+    case QPlatformTheme::ShowShortcutsInContextMenus:
+        return true;
+#endif
     default:
         return QGnomeTheme::themeHint(hint);
     }
