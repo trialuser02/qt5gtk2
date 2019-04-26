@@ -21,3 +21,7 @@ Version 0.5
 * fixed 'distclean' target
 * fixed gcc warnings
 * fixed QDockWidget icons (Qt 5.10+)
+
+Version 0.6
+* show shortcuts in context menu (see QTBUG-69452)
+* replaced deprecated functions
