@@ -5,7 +5,7 @@ OBJECTS_DIR=./.build/obj
 RCC_DIR=./.build/rcc
 
 CONFIG += hide_symbols
-
+DEFINES += QT_DEPRECATED_WARNINGS
 QMAKE_DISTCLEAN += -r .build
 
 #Install paths
