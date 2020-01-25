@@ -499,7 +499,9 @@ void QGtkStyleUpdateScheduler::updateTheme()
       if (oldTheme != QGtkStylePrivate::getThemeName()) {
           oldTheme = QGtkStylePrivate::getThemeName();
           QPalette newPalette = qApp->style()->standardPalette();
+#if (QT_VERSION < QT_VERSION_CHECK(5, 15, 0))
           QApplicationPrivate::setSystemPalette(newPalette);
+#endif
           QApplication::setPalette(newPalette);
           if (!QGtkStylePrivate::instances.isEmpty()) {
               QGtkStylePrivate::instances.last()->initGtkWidgets();

@@ -435,7 +435,11 @@ void QGtkStyle::polish(QApplication *app)
     // not supported as these should be entirely determined by
     // current Gtk settings
     if (app->desktopSettingsAware() && d->isThemeAvailable()) {
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 15, 0))
+        QApplication::setPalette(standardPalette());
+#else
         QApplicationPrivate::setSystemPalette(standardPalette());
+#endif
         QApplicationPrivate::setSystemFont(d->getThemeFont());
         d->applyCustomPaletteHash();
         if (!d->isKDE4Session())
