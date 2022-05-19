@@ -28,3 +28,6 @@ Version 0.6
 
 Version 0.7
 * fixed Qt 5.15 support
+
+Version 0.8
+* Added preview support to the file dialog (Ilya Fedin)
