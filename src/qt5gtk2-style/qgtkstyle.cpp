@@ -1029,12 +1029,12 @@ void QGtkStyle::drawPrimitive(PrimitiveElement element,
         QCommonStyle::drawPrimitive(element, option, painter, widget);
         if (!(option->state & State_Selected)) {
             break;
-        } else {
-            if (const QAbstractItemView *view = qobject_cast<const QAbstractItemView*>(widget)) {
-                if (!qobject_cast<QStyledItemDelegate*>(view->itemDelegate()))
-                    break;
-            }
-        } // fall through
+        }
+        if (const QAbstractItemView *view = qobject_cast<const QAbstractItemView*>(widget)) {
+            if (!qobject_cast<QStyledItemDelegate*>(view->itemDelegate()))
+                break;
+        }
+        // fall through
 
     case PE_PanelItemViewItem:
         if (const QStyleOptionViewItem *vopt = qstyleoption_cast<const QStyleOptionViewItem *>(option)) {
@@ -1700,7 +1700,6 @@ void QGtkStyle::drawComplexControl(ComplexControl control, const QStyleOptionCom
                     bool sunken = (titleBar->activeSubControls & SC_TitleBarContextHelpButton) && (titleBar->state & State_Sunken);
                     qt_gtk_draw_mdibutton(painter, titleBar, contextHelpButtonRect, hover, sunken);
 
-                    QColor blend;
                     QImage image(qt_titlebar_context_help);
                     QColor alpha = textColor;
                     alpha.setAlpha(128);
@@ -3596,7 +3595,7 @@ QRect QGtkStyle::subControlRect(ComplexControl control, const QStyleOptionComple
 
             if (subControl == SC_GroupBoxFrame)
                 return rect;
-            else if (subControl == SC_GroupBoxContents) {
+            if (subControl == SC_GroupBoxContents) {
                 int margin = 0;
                 int leftMarginExtension = 8;
                 return frameRect.adjusted(leftMarginExtension + margin, margin + topHeight + groupBoxTitleMargin, -margin, -margin);

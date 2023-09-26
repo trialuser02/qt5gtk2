@@ -386,7 +386,7 @@ bool QGtkStylePrivate::isKDE4Session()
 {
     static int version = -1;
     if (version == -1)
-        version = qgetenv("KDE_SESSION_VERSION").toInt();
+        version = qEnvironmentVariableIntValue("KDE_SESSION_VERSION");
     return (version == 4);
 }
 
