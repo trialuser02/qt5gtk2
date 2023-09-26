@@ -381,13 +381,11 @@ QPalette QGtkStyle::standardPalette() const
 
         palette.setColor(QPalette::Window, bg);
         palette.setColor(QPalette::Button, bg);
-        palette.setColor(QPalette::Background, bg);
         QColor disabled((fg.red()   + bg.red())  / 2,
                         (fg.green() + bg.green())/ 2,
                         (fg.blue()  + bg.blue()) / 2);
         palette.setColor(QPalette::Disabled, QPalette::Text, disabled);
         palette.setColor(QPalette::Disabled, QPalette::WindowText, disabled);
-        palette.setColor(QPalette::Disabled, QPalette::Foreground, disabled);
         palette.setColor(QPalette::Disabled, QPalette::ButtonText, disabled);
         palette.setColor(QPalette::Highlight, highlight);
         // calculate disabled colors by removing saturation
