@@ -31,3 +31,8 @@ Version 0.7
 
 Version 0.8
 * Added preview support to the file dialog (Ilya Fedin)
+
+Version 1.0
+* Moved home page to GitHub
+* Added compatibility with qt6gtk2
+* Removed deprecated code
