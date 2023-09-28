@@ -35,7 +35,8 @@ public:
 QPlatformTheme *Qt5Gtk2ThemePlugin::create(const QString &key, const QStringList &params)
 {
     Q_UNUSED(params);
-    if (!key.compare(QLatin1String(Qt5Gtk2Theme::name), Qt::CaseInsensitive))
+    if (!key.compare(QLatin1String(Qt5Gtk2Theme::name), Qt::CaseInsensitive) ||
+            !key.compare(QLatin1String("qt6gtk2"), Qt::CaseInsensitive))
         return new Qt5Gtk2Theme;
 
     return 0;
